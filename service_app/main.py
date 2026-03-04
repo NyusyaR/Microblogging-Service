@@ -34,8 +34,11 @@ router.include_router(medias_router, tags=["medias"])
 router.include_router(users_router, tags=["users"])
 app.include_router(router)
 
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
+STATIC_DIR.mkdir(parents=True, exist_ok=True)
 app.mount(
     "/static",
-    StaticFiles(directory="/service_app/static"),
-    name="static",
+    StaticFiles(directory=str(STATIC_DIR)),
+    name="static"
 )
