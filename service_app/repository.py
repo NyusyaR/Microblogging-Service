@@ -7,12 +7,20 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from service_app.database import (FollowerORM, LikeORM, MediaORM, TweetORM,
-                                  UserORM)
-from service_app.schemas import (ErrorResponse, LikeUser, MediaUploadOut,
-                                 OkResponse, TweetCreateIn, TweetCreateOut,
-                                 TweetOut, TweetsFeedOut, UserProfile,
-                                 UserProfileResponse, UserShort)
+from service_app.database import FollowerORM, LikeORM, MediaORM, TweetORM, UserORM
+from service_app.schemas import (
+    ErrorResponse,
+    LikeUser,
+    MediaUploadOut,
+    OkResponse,
+    TweetCreateIn,
+    TweetCreateOut,
+    TweetOut,
+    TweetsFeedOut,
+    UserProfile,
+    UserProfileResponse,
+    UserShort,
+)
 
 UPLOAD_DIR = Path("/service_app/static")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
