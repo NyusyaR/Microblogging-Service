@@ -1,5 +1,6 @@
 .env
-service_app/uploads
+service_app/static/*
+service_app/uploads/
 venv
 .venv
 __pycache__/

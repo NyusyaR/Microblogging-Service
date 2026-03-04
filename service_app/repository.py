@@ -1,3 +1,4 @@
+import os
 import uuid
 from pathlib import Path
 
@@ -7,14 +8,23 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from service_app.database import (FollowerORM, LikeORM, MediaORM, TweetORM,
-                                  UserORM)
-from service_app.schemas import (ErrorResponse, LikeUser, MediaUploadOut,
-                                 OkResponse, TweetCreateIn, TweetCreateOut,
-                                 TweetOut, TweetsFeedOut, UserProfile,
-                                 UserProfileResponse, UserShort)
+from service_app.database import FollowerORM, LikeORM, MediaORM, TweetORM, UserORM
+from service_app.schemas import (
+    ErrorResponse,
+    LikeUser,
+    MediaUploadOut,
+    OkResponse,
+    TweetCreateIn,
+    TweetCreateOut,
+    TweetOut,
+    TweetsFeedOut,
+    UserProfile,
+    UserProfileResponse,
+    UserShort,
+)
 
-UPLOAD_DIR = Path("/service_app/static")
+BASE_DIR = Path(__file__).resolve().parent
+UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", str(BASE_DIR / "static")))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 ALLOWED_TYPES = {"image/jpeg": "jpg", "image/png": "png", "image/gif": "gif"}
 MAX_SIZE = 2 * 1024 * 1024  # 2Mb

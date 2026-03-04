@@ -3,9 +3,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from service_app.dependencies import get_current_user_id, get_session
 from service_app.repository import TweetsRepository, UsersRepository
-from service_app.schemas import (ErrorResponse, MediaUploadOut, OkResponse,
-                                 TweetCreateIn, TweetCreateOut, TweetsFeedOut,
-                                 UserProfileResponse)
+from service_app.schemas import (
+    ErrorResponse,
+    MediaUploadOut,
+    OkResponse,
+    TweetCreateIn,
+    TweetCreateOut,
+    TweetsFeedOut,
+    UserProfileResponse,
+)
 
 tweets_router = APIRouter()
 medias_router = APIRouter()

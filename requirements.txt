@@ -1,11 +1,8 @@
 fastapi
 uvicorn
 sqlalchemy
-aiosqlite
 psycopg2-binary
 asyncpg==0.31.0
 python-multipart==0.0.22
-pytest_asyncio==1.3.0
-httpx
 alembic==1.18.4
 pydantic_settings==2.13.1
