@@ -1,3 +1,4 @@
+import os
 import uuid
 from pathlib import Path
 
@@ -22,7 +23,8 @@ from service_app.schemas import (
     UserShort,
 )
 
-UPLOAD_DIR = Path("/service_app/static")
+BASE_DIR = Path(__file__).resolve().parent
+UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", str(BASE_DIR / "static")))
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 ALLOWED_TYPES = {"image/jpeg": "jpg", "image/png": "png", "image/gif": "gif"}
 MAX_SIZE = 2 * 1024 * 1024  # 2Mb
