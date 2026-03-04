@@ -9,15 +9,12 @@ from sqlalchemy.pool import NullPool
 from service_app.database import Microblogging, UserORM
 from service_app.dependencies import get_session
 from service_app.main import app
-
-TEST_DATABASE_URL = (
-    "postgresql+asyncpg://user_test:pass_test@172.19.231.243:5432/m_test"
-)
+from service_app.config import settings
 
 
 @pytest_asyncio.fixture(scope="session")
 async def engine():
-    eng = create_async_engine(TEST_DATABASE_URL, echo=False, poolclass=NullPool)
+    eng = create_async_engine(settings.database_url, echo=False, poolclass=NullPool)
 
     async with eng.begin() as conn:
         await conn.run_sync(Microblogging.metadata.drop_all)
