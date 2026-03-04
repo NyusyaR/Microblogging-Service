@@ -3,7 +3,8 @@ import io
 import pytest
 from sqlalchemy import func, select
 
-from service_app.database import FollowerORM, LikeORM, MediaORM, TweetORM, UserORM
+from service_app.database import (FollowerORM, LikeORM, MediaORM, TweetORM,
+                                  UserORM)
 
 
 class TestTweets:
