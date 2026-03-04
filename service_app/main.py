@@ -37,8 +37,4 @@ app.include_router(router)
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
 STATIC_DIR.mkdir(parents=True, exist_ok=True)
-app.mount(
-    "/static",
-    StaticFiles(directory=str(STATIC_DIR)),
-    name="static"
-)
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
