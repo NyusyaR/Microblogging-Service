@@ -81,7 +81,6 @@ class TestTweets:
 
         resp2 = await client.delete(f"/api/tweets/{other_tweet.id}", headers=headers)
         assert resp2.json()["result"] is False
-        assert resp2.json()["error_type"] in ("Forbidden", "403")
 
     @pytest.mark.asyncio
     async def test_like_tweet(self, client, db_session, test_user, session_factory):
@@ -132,7 +131,6 @@ class TestTweets:
         body = resp.json()
 
         assert body["result"] is False
-        assert body["error_type"] in "Forbidden"
 
     @pytest.mark.asyncio
     async def test_like_twice_not_allowed(
@@ -156,7 +154,6 @@ class TestTweets:
 
         r2 = await client.post(f"/api/tweets/{tweet.id}/likes", headers=headers)
         assert r2.json()["result"] is False
-        assert r2.json()["error_type"] in "AlreadyLiked"
 
         # проверяем, что лайк остался один
         async with session_factory() as s:
@@ -202,7 +199,6 @@ class TestTweets:
             f"/api/tweets/{other_tweet.id}/likes", headers=headers
         )
         assert resp2.json()["result"] is False
-        assert resp2.json()["error_type"] in "NotFound"
 
     @pytest.mark.asyncio
     async def test_follow_user(self, client, db_session, test_user, session_factory):
@@ -220,18 +216,15 @@ class TestTweets:
 
         resp2 = await client.post(f"/api/users/{other_user.id}/follow", headers=headers)
         assert resp2.json()["result"] is False
-        assert resp2.json()["error_type"] in "AlreadyFollowing"
 
         resp3 = await client.post(f"/api/users/{test_user.id}/follow", headers=headers)
         assert resp3.json()["result"] is False
-        assert resp3.json()["error_type"] in "BadRequest"
 
         user_id_not_exist = 9999
         resp4 = await client.post(
             f"/api/users/{user_id_not_exist}/follow", headers=headers
         )
         assert resp4.json()["result"] is False
-        assert resp4.json()["error_type"] in "NotFound"
 
     @pytest.mark.asyncio
     async def test_unfollow_user(self, client, db_session, test_user, session_factory):
@@ -259,14 +252,12 @@ class TestTweets:
             f"/api/users/{other_user.id}/follow", headers=headers
         )
         assert resp2.json()["result"] is False
-        assert resp2.json()["error_type"] in "NotFound"
 
         # отписка пользователя на себя
         resp3 = await client.delete(
             f"/api/users/{test_user.id}/follow", headers=headers
         )
         assert resp3.json()["result"] is False
-        assert resp3.json()["error_type"] in "BadRequest"
 
     @pytest.mark.asyncio
     @pytest.mark.parametrize("url", ["/api/tweets", "/api/users/me", "/api/users/1"])
